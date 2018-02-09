@@ -1,0 +1,34 @@
+---
+title: "Blast Search of Human Peptide Hormones in Viruses"
+author: "Hui/Jonathan"
+date: "September 18, 2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, eval=FALSE, include=TRUE)
+options(stringsAsFactors = FALSE)
+```
+
+## Make fasta file
+```{r fasta}
+f1 <- readLines("Human Peptide Hormones.txt")
+f1 <- f1[-grep("http:", f1)]
+f2 <- readLines("Processed hormone sequences from UniProt.txt")
+write.table(c(f1,f2), "HumanPeptideHormones.fasta", row.names = FALSE, col.names = FALSE, quote = FALSE)
+```
+
+## Download viruses database
+cd /n/data1/joslin/cores/bbcore/emrah_virome/viral_hormones/ncbi  
+wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/ref_viruses_rep_genomes.tar.gz  
+wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/ref_viruses_rep_genomes.tar.gz.md5 
+checksum:  
+md5sum -c ref_viruses_rep_genomes.tar.gz.md5 | grep -v "OK$" 
+unzip
+tar -xvzf ref_viruses_rep_genomes.tar.gz  
+
+## Run blast
+module load seq/blast/ncbi-blast/2.6.0+    
+bsub -n 12 -W 120:00 -J blast -q long tblastn -query /n/data1/joslin/cores/bbcore/emrah_virome/HumanPeptideHormones.fasta -db /n/data1/joslin/cores/bbcore/emrah_virome/viral_hormones/ncbi/ref_viruses_rep_genomes -out  /n/data1/joslin/cores/bbcore/emrah_virome/blast_peptide_hormones_ncbi_viruses.txt -evalue 0.1 -num_threads 12  
+
+Result: [blast_peptide_hormones_ncbi_viruses.txt](blast_peptide_hormones_ncbi_viruses.txt)

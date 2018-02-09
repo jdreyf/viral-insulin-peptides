@@ -1,0 +1,38 @@
+---
+title: "Blast Search of Inslin-Containing Viruses in Human Gut Virome"
+author: "Hui/Jonathan"
+date: "August 31, 2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, eval=FALSE, include=TRUE)
+options(stringsAsFactors = FALSE)
+```
+
+## Concatenate all reads
+bsub -Is -q interactive bash  
+cd /n/data1/joslin/cores/bbcore/emrah_virome/gut_virome/fasta  
+module load stats/R/3.1.2; R
+```{r Concatenate}
+# These files are large and publically available, so did not put up on github
+# reads <- dir(pattern = "\\.fasta")
+# catfiles <- paste0("cat ", paste(reads, collapse = " "), " > virome_reads.fasta")
+# write.table(c("#!/bin/bash", catfiles), "cat_files.sh", quote = FALSE, row.names = FALSE, col.names = FALSE)
+```
+q()
+make cat_files.sh 
+chmod +x cat_files.sh; bash cat_files.sh  
+
+## Make blast database
+bsub -Is -q interactive bash  
+cd /n/data1/joslin/cores/bbcore/emrah_virome/gut_virome/fasta  
+module load seq/blast/ncbi-blast/2.6.0+    
+makeblastdb -in virome_reads.fasta -parse_seqids -dbtype nucl -out db/virome_reads  
+
+## Run blast
+bsub -Is -n 6 -q interactive bash  
+cd /n/data1/joslin/cores/bbcore/emrah_virome/  
+module load seq/blast/ncbi-blast/2.6.0+    
+blastn -query /n/data1/joslin/cores/bbcore/emrah_virome/virus_genomes.fa -db /n/data1/joslin/cores/bbcore/emrah_virome/gut_virome/fasta/db/virome_reads -out  /n/data1/joslin/cores/bbcore/emrah_virome/blast_gut_virome_reads.txt -evalue 1 -num_threads 6  
+Result: [blast_gut_virome_reads.txt](blast_gut_virome_reads.txt).
