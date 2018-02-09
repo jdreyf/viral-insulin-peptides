@@ -31,4 +31,4 @@ tar -xvzf ref_viruses_rep_genomes.tar.gz
 module load seq/blast/ncbi-blast/2.6.0+    
 bsub -n 12 -W 120:00 -J blast -q long tblastn -query /n/data1/joslin/cores/bbcore/emrah_virome/HumanPeptideHormones.fasta -db /n/data1/joslin/cores/bbcore/emrah_virome/viral_hormones/ncbi/ref_viruses_rep_genomes -out  /n/data1/joslin/cores/bbcore/emrah_virome/blast_peptide_hormones_ncbi_viruses.txt -evalue 0.1 -num_threads 12  
 
-Result: [blast_peptide_hormones_ncbi_viruses.txt](blast_peptide_hormones_ncbi_viruses.txt)
+Result: blast_peptide_hormones_ncbi_viruses.txt.
