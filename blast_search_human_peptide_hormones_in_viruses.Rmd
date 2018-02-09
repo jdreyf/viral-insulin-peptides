@@ -21,7 +21,7 @@ write.table(c(f1,f2), "HumanPeptideHormones.fasta", row.names = FALSE, col.names
 ## Download virus database
 cd /n/data1/joslin/cores/bbcore/emrah_virome/viral_hormones/ncbi  
 wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/ref_viruses_rep_genomes.tar.gz  
-wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/ref_viruses_rep_genomes.tar.gz.md5 
+wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/ref_viruses_rep_genomes.tar.gz.md5  
 checksum:  
 md5sum -c ref_viruses_rep_genomes.tar.gz.md5 | grep -v "OK$" 
 unzip
