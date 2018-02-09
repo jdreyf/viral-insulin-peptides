@@ -18,7 +18,7 @@ f2 <- readLines("Processed hormone sequences from UniProt.txt")
 write.table(c(f1,f2), "HumanPeptideHormones.fasta", row.names = FALSE, col.names = FALSE, quote = FALSE)
 ```
 
-## Download viruses database
+## Download virus database
 cd /n/data1/joslin/cores/bbcore/emrah_virome/viral_hormones/ncbi  
 wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/ref_viruses_rep_genomes.tar.gz  
 wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/ref_viruses_rep_genomes.tar.gz.md5 
