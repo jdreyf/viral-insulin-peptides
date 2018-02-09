@@ -20,8 +20,8 @@ module load stats/R/3.1.2; R
 # catfiles <- paste0("cat ", paste(reads, collapse = " "), " > virome_reads.fasta")
 # write.table(c("#!/bin/bash", catfiles), "cat_files.sh", quote = FALSE, row.names = FALSE, col.names = FALSE)
 ```
-q()
-make cat_files.sh 
+q()  
+make cat_files.sh  
 chmod +x cat_files.sh; bash cat_files.sh  
 
 ## Make blast database
