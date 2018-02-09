@@ -35,4 +35,4 @@ bsub -Is -n 6 -q interactive bash
 cd /n/data1/joslin/cores/bbcore/emrah_virome/  
 module load seq/blast/ncbi-blast/2.6.0+    
 blastn -query /n/data1/joslin/cores/bbcore/emrah_virome/virus_genomes.fa -db /n/data1/joslin/cores/bbcore/emrah_virome/gut_virome/fasta/db/virome_reads -out  /n/data1/joslin/cores/bbcore/emrah_virome/blast_gut_virome_reads.txt -evalue 1 -num_threads 6  
-Result: [blast_gut_virome_reads.txt](blast_gut_virome_reads.txt).
+Result: blast_gut_virome_reads.txt.
